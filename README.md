@@ -5,18 +5,18 @@
 ![Keras](https://img.shields.io/badge/Keras-D00000.svg?logo=Keras)
 ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8.svg?logo=opencv)
 
-## 📌 Overview
+##  Overview
 This repository contains the implementation of a **3D Convolutional Neural Network (3D CNN)** for Human Action Recognition (HAR) from video sequences. Unlike traditional 2D CNN approaches that process frames independently and lose temporal context, this 3D CNN architecture simultaneously extracts spatial (appearance) and temporal (motion) features using 3D kernels. 
 
 This project aims to demonstrate an end-to-end deep learning pipeline capable of achieving high accuracy and near real-time inference speeds under constrained computational resources.
 
-## 🚀 Key Innovations & Improvements
+##  Key Innovations & Improvements
 This project significantly refactors and improves upon baseline hybrid models (e.g., CNN + ConvLSTM2D) by introducing:
 1. **Random Continuous Sampling**: Replaced standard sequential sampling (taking the first $N$ frames) with a random starting point approach. This acts as a natural temporal data augmentation, preventing the model from overfitting to the introductory segments of videos.
 2. **Global Average Pooling 3D**: Replaced the parameter-heavy `Flatten` layer with `GlobalAveragePooling3D`. This drastically reduces the model's footprint and mitigates overfitting risks while retaining crucial spatiotemporal representations.
 3. **Optimized Functional Architecture**: Transitioned from a `Sequential` structure to the Keras `Functional API` for a more robust and scalable model design.
 
-## 📊 Dataset
+##  Dataset
 The model is trained and evaluated on a focused subset of the **UCF50 Action Recognition Data Set**, specifically chosen to represent diverse motion dynamics:
 * `WalkingWithDog`
 * `TaiChi`
@@ -25,7 +25,7 @@ The model is trained and evaluated on a focused subset of the **UCF50 Action Rec
 
 *Input dimensions:* `(Batch, 20 Frames, 64 Height, 64 Width, 3 RGB Channels)`
 
-## 📈 Results & Benchmarks
+##  Results & Benchmarks
 The proposed 3D CNN model demonstrates a remarkable performance leap compared to the baseline ConvLSTM architecture.
 
 | Metric | Baseline Model (ConvLSTM) | Proposed Model (3D CNN) | Improvement |
@@ -38,15 +38,45 @@ The proposed 3D CNN model demonstrates a remarkable performance leap compared to
 * **Generalization Gap**: The gap between training and validation loss was significantly narrowed, effectively curing the severe overfitting observed in the baseline model.
 * **Inference Speed**: Tested on an NVIDIA Tesla P100, the model achieves an average inference time of **~0.02 seconds per 20-frame clip**, enabling inference-level real-time processing capabilities.
 
-## 📂 Repository Structure
+##  Repository Structure
 ```text
-📦 3d-cnn-human-action-recognition
- ┣ 📂 assets/          # Contains images and plots for documentation
- ┣ 📂 data/            # (Local) Directory for the UCF50 dataset
- ┣ 📂 docs/            # Academic reports and project documentation
- ┃ ┗ 📜 Bao-cao-mon-hoc.pdf
- ┣ 📂 notebooks/       # Jupyter notebooks for experimentation and training
- ┃ ┗ 📜 actionreg-with-3dcnn.ipynb
- ┣ 📜 README.md        # Project documentation
- ┣ 📜 requirements.txt # Dependencies for reproducibility
- ┗ 📜 LICENSE          # MIT License
+ 3d-cnn-human-action-recognition
+ ┣  assets/          # Contains images and plots for documentation
+ ┣  data/            # (Local) Directory for the UCF50 dataset
+ ┣  docs/            # Academic reports and project documentation
+ ┃ ┗  Bao-cao-mon-hoc.pdf
+ ┣  notebooks/       # Jupyter notebooks for experimentation and training
+ ┃ ┗  actionreg-with-3dcnn.ipynb
+ ┣  README.md        # Project documentation
+ ┣  requirements.txt # Dependencies for reproducibility
+ ┗  LICENSE          # MIT License
+```
+
+##  Getting Started
+
+### Prerequisites
+Ensure you have Python 3.12+ installed. It is highly recommended to run this project in an environment with GPU acceleration (e.g., Google Colab, Kaggle, or a local machine with an NVIDIA GPU).
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/luongminhnhat297/3d-cnn-human-action-recognition.git
+   cd 3d-cnn-human-action-recognition
+   ```
+2. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Download the [UCF50 Dataset](https://www.crcv.ucf.edu/data/UCF50.php) and extract it into the `data/` directory. Ensure the folder structure matches the classes defined in the notebook.
+
+### Usage
+Navigate to the `notebooks/` directory and open the main Jupyter Notebook to execute the data extraction, model training, and evaluation pipeline:
+```bash
+jupyter notebook notebooks/actionreg-with-3dcnn.ipynb
+```
+
+##  Acknowledgments
+Developed as part of the Deep Learning coursework at the Faculty of Mechanical Engineering - Ho Chi Minh City University of Technology and Education (HCMUTE). Special thanks to Dr. Vu Quang Huy for his dedicated academic guidance and support throughout this research.
+
+##  License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
