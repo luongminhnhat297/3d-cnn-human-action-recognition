@@ -1,0 +1,1 @@
+tensorflow numpy opencv-python moviepy scikit-learn matplotlib 
